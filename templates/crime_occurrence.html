@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+          background-color: #121212;
+          color: #fff;
+          margin: 0;
+          padding: 0;
+      }
+
+      .navbar {
+          background-color: #333;
+          padding: 10px 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: fixed;
+          width: 100%;
+          top: 0;
+          z-index: 9999;
+      }
+
+      .navbar a {
+          color: #fff;
+          text-decoration: none;
+          margin: 0 20px;
+          font-size: 18px;
+          transition: color 0.3s ease;
+          padding: 5px 10px;
+          border-radius: 5px;
+          border: 2px solid transparent;
+      }
+
+      .navbar a:hover {
+          color: #fff;
+          background-color: #555;
+          border-color: #000;
+      }
+
+      .section__container {
+          max-width: 1200px;
+          margin: auto;
+          padding: 5rem 1rem;
+      }
+
+      .header__container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          text-align: center;
+          padding: 5rem 1rem;
+      }
+
+      .header__form {
+          width: 100%;
+          max-width: 500px;
+          background-color: #333;
+          padding: 2rem;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .header__form h4 {
+          margin-bottom: 1rem;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #fff;
+      }
+
+      .header__form select,
+      .header__form input {
+          width: 100%;
+          padding: 0.75rem;
+          margin-bottom: 1rem;
+          border: none;
+          border-radius: 5px;
+          background-color: #444;
+          color: #fff;
+          font-size: 1rem;
+      }
+
+      .header__form button {
+          width: 100%;
+          padding: 0.75rem;
+          margin-top: 1rem;
+          border: none;
+          border-radius: 5px;
+          background-color: #555;
+          color: #fff;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .header__form button:hover {
+          background-color: #777;
+      }
+
+      .content1 {
+  width: 100%;
+  min-height: 100vh;
+  background: rgb(44, 42, 47);
+  box-sizing: border-box;
+  padding: 20px;
+  font-family: "Segoe UI";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content1 form {
+  width: 100%;
+  max-width: 350px;
+  padding: 2rem;
+  background-color: #05050544;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.content1 input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  background-color: #3b3636;
+  border-radius: 5px;
+}
+
+.content1 input[type="submit"] {
+  background-color: gray;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.content1 input[type="submit"]:hover {
+  background-color: #04010771;
+}
+
+.content1 input[type="text"] {
+  color: white;
+}
+
+
+@media (max-width: 600px) {
+  .content1 form {
+      max-width: none;
+  }
+}
+          .header__form h4 {
+              font-size: 1.2rem;
+          }
+
+          .header__form select,
+          .header__form input {
+              padding: 0.5rem;
+          }
+
+          .header__form button {
+              padding: 0.5rem;
+          }
+
+          .content1 form {
+              padding: 1rem;
+          }
+
+          .content1 h2 {
+              font-size: 1.5rem;
+          }
+
+          .content1 input {
+              padding: 0.5rem;
+          }
+      
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="navbar">
+        <a href="{{ url_for('home') }}">Home</a>
+        
+        
+    </div>
+</nav>
+    <header>
+      
+      <div class="section__container header__container">
+        <div class="header__form">
+            <form id="crime-form" action="{{url_for('crime_occurrence')}}" method="post">
+                <h4>Find Records</h4>
+                <select name="search_type" id="search_type">
+                  <option value="crime_occurrence.html">Crime Occurrence</option>
+                </select>
+                
+                <input type="text" name="crime_id" placeholder="Enter crime ID" />
+                <input type="text" name="location_id" placeholder="Enter location id" />
+                <input type="text" name="date_of_crime" placeholder="Date of Crime" />
+                <button class="btn form__btn" type="submit">Find</button>
+               
+              </form>
+              <br> 
+              <form id="delete-crime-form" action="{{ url_for('delete_crime_occurrence') }}" method="post">
+                  <h4>Delete a Record</h4>
+                  <input type="text" name="crime_id" placeholder="Enter Crime ID to Delete" required />
+                  <button class="btn form__btn" type="submit">Delete</button>
+                  {% if done %}
+                      <p style="color: rgb(15, 227, 36);">{{ done }}</p>
+                  {% endif %}
+                  {% if error %}
+                      <p style="color: red;">{{ error }}</p>
+                  {% endif %}
+                  </form>
+        </div>
+      </header>
+    
+      <div class="content1">
+        
+        <form id="insert-crime-form" action="{{url_for('insert_crime_occurrence')}}" method="post">
+          <h2>Insert a New Record</h2>
+          
+          <label for="suspect_id">Suspect ID:</label>
+          <input type="text" id="suspect_id" name="suspect_id">
+          
+          <label for="crime_id">Crime ID:</label>
+          <input type="text" id="crime_id" name="crime_id"  required>
+          
+          <label for="location_id">Location ID:</label>
+          <input type="text" id="location_id" name="location_id">
+          
+          <label for="date_of_crime">Date of Crime:</label>
+          <input type="text" id="date_of_crime" name="date_of_crime">
+          
+          <label for="status">Status:</label>
+          <input type="text" id="status" name="status">
+          
+          <label for="notes">Notes:</label>
+          <input type="text" id="notes" name="notes">
+          <input type="submit" value="Submit">
+          {% if donein %}
+                        <p style="color: rgb(15, 227, 36);">{{ donein }}</p>
+                    {% endif %}
+        </form>
+
+        </div>
+
+
+
+      <script>
+        fetch('/data')
+          .then((response) => response.json())
+          .then((data) => {
+            const dataContainer = document.getElementById('data-container');
+            data.forEach((item) => {
+              const div = document.createElement('div');
+              div.textContent = `${item.column1} - ${item.column2}`;  // Replace 'column1' and 'column2' with your actual column names
+              dataContainer.appendChild(div);
+            });
+          })
+          .catch((error) => console.error('Error fetching data:', error));
+      </script>
+</body>
+</html>
